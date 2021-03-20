@@ -1,0 +1,35 @@
+<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+<table *ngIf="dataLoaded!=false" class="table">
+    <thead>
+     <tr>
+        <th scope="col">Resim</th>
+        <th>Araç Kodu</th>
+        <th>Marka</th>
+        <th>Araç Adı</th>
+        <th>Renk</th>
+        <th>Model Yılı</th>
+        <th>Günlük Fiyat(TL)</th>
+        <th>Açıklama</th>
+     </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of cars">
+        <td><img src="https://localhost:44370/{{car.imagePath}}" style="width: 50px;;height: 50px;;"></td>
+        <td>{{car.carId}}</td>
+        <td>{{car.brandName}}</td>
+        <td>{{car.carName}}</td>
+        <td>{{car.colorName}}</td>
+        <td>{{car.modelYear}}</td>
+        <td>{{car.dailyPrice}}</td>
+        <td>{{car.description}}</td>
+        <td>
+          <div class="car-body">
+            <button routerLink="/cars/car-detail/{{car.carId}}" type="button" class="btn btn-success">Detaylar</button>
+          </div>
+        </td>
+       
+      </tr>
+    </tbody>
+</table>
