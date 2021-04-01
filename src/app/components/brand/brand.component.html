@@ -1,8 +1,14 @@
 <ul class="list-group">
-    <li class="list-group-item active" aria-current="true" style="text-align: center;">MARKALAR</li>
-  <li (click)="setCurrentBrand(brand)"
+  
+  <li class="list-group-item active" aria-current="true" style="text-align: center;">MARKALAR</li>
+  <div class="mb-3">
+    <label for="filterText" class="form-label">Marka Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="marka adı giriniz">
+  </div>
+ 
+   <li (click)="setCurrentBrand(brand)"
      routerLink="/cars/brand/{{brand.brandId}}"
-     *ngFor="let brand of brands" 
+     *ngFor="let brand of brands | brandFilterPipe:filterText" 
      [class]="getCurrentBrandClass(brand)">
      {{brand.brandName}}
   </li> 

@@ -39,14 +39,33 @@
 
         <tr>
             <th>Günlük Kiralama Ücreti</th>
-            <td>{{cars.dailyPrice}}₺</td>
+            <td>{{cars.dailyPrice | currency: "₺" }}</td>
         </tr>
 
         <tr>
             <th>Açıklama</th>
             <td>{{cars.description}}</td>
         </tr>
-    
+       
+        <tr>
+            <th>  
+        
+            </th>
+            <td>
+
+            </td>
+        
+        
+        
+        </tr>
+
     </tbody>
-     
- </table>
+    
+</table>
+<div class="action">
+    <button (click)="rentalControl(cars.carId)"
+        
+        type="button" class="btn btn-success">
+        Kirala
+    </button>
+</div>

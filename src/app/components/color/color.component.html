@@ -1,8 +1,13 @@
 <ul class="list-group">
     <li  class="list-group-item active" aria-current="true" style="text-align: center;">Renkler</li>
+    <div class="mb-3">
+    <label for="filterText" class="form-label">Renk ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="renk adı giriniz">
+  </div>
+  
     <li (click)="setCurrentColor(color)"
     routerLink="/cars/color/{{color.colorId}}"
-    *ngFor="let color of colors "
+    *ngFor="let color of colors | colorFilterPipe:filterText "
      [class]="getCurrentColorClass(color)">
      {{color.colorName}}
      </li>    

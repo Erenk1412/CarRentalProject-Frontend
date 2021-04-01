@@ -1,6 +1,59 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
+
+  <div class="row mb-2">
+
+    <div class="col col-4">
+      <select [(ngModel)]="brandId" class="form-select">
+        <!-- <option selected>Araba Markası Seçin</option> -->
+  
+        <option *ngFor="let brand of brands" 
+        [value]="brand.brandId"
+        [selected]="getSelectedBrand(brand.brandId)">      
+          {{ brand.brandName }}
+        </option>
+  
+      </select>
+    </div>
+  
+    <div class="col col-4">
+      <select [(ngModel)] = "colorId" class="form-select">
+        <!-- <option selected>Araba Rengini Seçin</option> -->
+  
+        <option *ngFor="let color of colors"
+        [value]="color.colorId"
+        [selected] = "getSelectedColor(color.colorId)">
+          {{ color.colorName }}
+        </option>
+  
+      </select>
+    </div>
+  
+    <div class="col col-2">
+      <div class="btn-group">
+        <button
+         (click)="getCarsByFilter(brandId,colorId)"
+          type="button"
+          class="btn btn-warning"
+        >
+          Filtrele
+        </button>
+      </div>
+    </div>
+  
+    <div class="col col-2">
+      <div class="btn-group">
+        <button routerLink="/cars"
+        type="button"
+        class="btn btn-danger"
+        >
+          Temizle
+        </button>
+      </div>
+    </div>
+  
+  </div>
 <table *ngIf="dataLoaded!=false" class="table">
     <thead>
      <tr>
@@ -10,7 +63,7 @@
         <th>Araç Adı</th>
         <th>Renk</th>
         <th>Model Yılı</th>
-        <th>Günlük Fiyat(TL)</th>
+        <th>Günlük Fiyat</th>
         <th>Açıklama</th>
      </tr>
     </thead>
@@ -22,7 +75,7 @@
         <td>{{car.carName}}</td>
         <td>{{car.colorName}}</td>
         <td>{{car.modelYear}}</td>
-        <td>{{car.dailyPrice}}</td>
+        <td>{{car.dailyPrice | currency: "₺"}}</td>
         <td>{{car.description}}</td>
         <td>
           <div class="car-body">

@@ -10,6 +10,8 @@ import { ListResponseModel } from '../models/listResponseModel';
 export class ColorService {
   apiUrl='https://localhost:44370/api/color/getallcolors';
   constructor(private httpClient:HttpClient) { }
+  
+  
   getColors():Observable<ListResponseModel<Color>>{
     return this.httpClient.get<ListResponseModel<Color>>(this.apiUrl)
   }
