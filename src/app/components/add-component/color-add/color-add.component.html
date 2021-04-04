@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-header"><h5 class="title font-weight-bold">Marka Ekleme Formu </h5></div>
+  
+    <div class="card-body">
+  
+      <form [formGroup]="colorAddForm">
+ 
+        <div class="row">
+            <div class="mb-3">
+                <label for="colorName">Marka</label>
+                <div class="form-group">
+                    <input type="text" id="colorName" class="form-control" formControlName="colorName" placeholder="Eklemek İstediğiniz Renk Adını Giriniz"/>                   
+                </div>
+            </div>
+        </div>
+
+      </form>
+  
+    </div>
+  
+    <div class="card-footer">
+      
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-fill btn-danger" routerLink="/colors/colorList">Geri Dön</button>
+        <button class="btn btn-fill btn-primary me-md-end"  (click)="addColor()">Ekle</button>
+      </div>
+    </div>
+  
+  </div>

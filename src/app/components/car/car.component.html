@@ -1,13 +1,11 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
-
+<br>
   <div class="row mb-2">
 
-    <div class="col col-4">
-      <select [(ngModel)]="brandId" class="form-select">
-        <!-- <option selected>Araba Markası Seçin</option> -->
-  
+    <div class="col col-4"> Marka
+      <select [(ngModel)]="brandId" class="form-select" >
         <option *ngFor="let brand of brands" 
         [value]="brand.brandId"
         [selected]="getSelectedBrand(brand.brandId)">      
@@ -17,10 +15,8 @@
       </select>
     </div>
   
-    <div class="col col-4">
+    <div class="col col-4"> Renk
       <select [(ngModel)] = "colorId" class="form-select">
-        <!-- <option selected>Araba Rengini Seçin</option> -->
-  
         <option *ngFor="let color of colors"
         [value]="color.colorId"
         [selected] = "getSelectedColor(color.colorId)">
@@ -31,11 +27,12 @@
     </div>
   
     <div class="col col-2">
+      <br>
       <div class="btn-group">
         <button
          (click)="getCarsByFilter(brandId,colorId)"
           type="button"
-          class="btn btn-warning"
+          class="btn btn-primary"
         >
           Filtrele
         </button>
@@ -43,6 +40,7 @@
     </div>
   
     <div class="col col-2">
+      <br>
       <div class="btn-group">
         <button routerLink="/cars"
         type="button"

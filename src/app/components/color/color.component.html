@@ -1,8 +1,9 @@
+
 <ul class="list-group">
-    <li  class="list-group-item active" aria-current="true" style="text-align: center;">Renkler</li>
+    <li  class="list-group-item list-group-item-danger" aria-current="true" style="text-align: center;">Renkler</li>
     <div class="mb-3">
-    <label for="filterText" class="form-label">Renk ara</label>
-    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="renk adı giriniz">
+    <label for="filterText" class="form-label"></label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Renk ara">
   </div>
   
     <li (click)="setCurrentColor(color)"

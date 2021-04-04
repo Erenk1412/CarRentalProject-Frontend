@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-header"><h5 class="title font-weight-bold">Marka Ekleme Formu </h5></div>
+  
+    <div class="card-body">
+  
+      <form [formGroup]="brandAddForm">
+ 
+        <div class="row">
+            <div class="mb-3">
+                <label for="brandName">Marka</label>
+                <div class="form-group">
+                    <input type="text" id="brandName" class="form-control" formControlName="brandName" placeholder="Eklemek İstediğiniz Markayı Giriniz"/>                   
+                </div>
+            </div>
+        </div>
+
+      </form>
+  
+    </div>
+  
+    <div class="card-footer">
+      
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-fill btn-danger" routerLink="/brands/brandList">Geri Dön</button>
+        <button class="btn btn-fill btn-primary me-md-end"  (click)="addBrand()">Ekle</button>
+      </div>
+    </div>
+  
+  </div>
