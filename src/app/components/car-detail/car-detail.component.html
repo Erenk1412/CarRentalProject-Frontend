@@ -13,7 +13,7 @@
 </div>    
 
 
-<table class="table">
+<table  class="table">
     
     <tbody  *ngIf="cars">
          
@@ -48,24 +48,24 @@
         </tr>
        
         <tr>
-            <th>  
-        
-            </th>
-            <td>
-
-            </td>
-        
-        
+            <th> Gerekli Findex Puanı </th>
+            <td>{{cars.minFindexScore}} </td>
         
         </tr>
+        
+       
 
+    </tbody>
+    <tbody *ngIf=user (change)="getUserByEmail()">
+        <th> Sizin Findex Puanınız </th>
+        <td>{{user.findexScore}}</td>
     </tbody>
     
 </table>
 <div class="action">
-    <button (click)="rentalControl(cars.carId)"
-        
-        type="button" class="btn btn-success">
-        Kirala
-    </button>
+    <div  class="d-grid gap-2">
+        <button  (click)="rentalControl(cars.carId)"  type="button" class="btn btn-success">Kirala</button>
+        <button class="btn btn-primary" routerlink="/cars" type="button">Göz Atmaya Geri Dön</button>
+      </div>
+    
 </div>

@@ -3,12 +3,18 @@ import {FormGroup,FormControl,FormBuilder,Validators,} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
+import { Customer } from 'src/app/models/customer';
 import { Image } from 'src/app/models/Image';
 import { Rental } from 'src/app/models/rental';
 import { RentalDetails } from 'src/app/models/rentalDetail';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarService } from 'src/app/services/car.service';
+import { CustomerService } from 'src/app/services/customer.service';
 import { ImageService } from 'src/app/services/image.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-rent',
@@ -25,6 +31,10 @@ export class RentComponent implements OnInit {
   returnDate:Date;
   finalPrice:number;
   myRental:RentalDetails;
+  customer:Customer;
+  
+  userId:number=this.authService.userId;
+  customerId:number
   
  
   constructor(
@@ -34,22 +44,38 @@ export class RentComponent implements OnInit {
     private carService:CarService,
     private imageService:ImageService,
     private router:Router,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private customerService:CustomerService,
+    private localStorageService:LocalStorageService,
+    private authService:AuthService,
+   
+  
+
+    
   ) { }
 
   ngOnInit(): void {
    
     this.activatedRoute.params.subscribe(params=>{
+      
       if(params["carId"]){
+        this.authService.userDetailFromToken()
+        this.userId=this.authService.userId;
+        this.getCustomerByUserId(this.userId)
+        
         this.carId=parseInt(params["carId"])
         this.toastrService.info("Tarihleri Seçiniz")
         
        this.getDetails(params["carId"]);
        this.getImage(params["carId"]);
-       this.createRentAddForm();
+       
+      
        this.rentDate = new Date();
        this.returnDate = new Date();
-
+       this.createRentAddForm();
+       
+       
+      
       }
       
       
@@ -58,9 +84,10 @@ export class RentComponent implements OnInit {
 
   }
   createRentAddForm() {
+    
     this.rentAddForm = this.formBuilder.group({
       carId: [this.carId,Validators.required],
-      customerId: [1, Validators.required], 
+      customerId: [Number(localStorage.getItem('customerid')) , Validators.required], 
       rentDate: ["" , Validators.required],
       returnDate:["",null]
       
@@ -70,14 +97,16 @@ export class RentComponent implements OnInit {
   
 
 getImage(carId:number){
-      this.imageService.getImagesByCarId(carId).subscribe(response=>{
-        this.images=response.data[0];
+ this.imageService.getImagesByCarId(carId).subscribe(response=>{
+    this.images=response.data[0];
+    
       
     })
 }
 getDetails(carId:number){
   this.carService.getCarsById(carId).subscribe(response=>{
     this.cars=response.data[0];
+    
     console.log(this.cars);
    
   })
@@ -95,10 +124,24 @@ getRentSummary() {
     var difference = date2.getTime() - date1.getTime();
     var totalDate = Math.ceil(difference / (1000 * 3600 * 24));
     this.finalPrice = totalDate * this.cars.dailyPrice;
-   
+   localStorage.setItem("finalprice",this.finalPrice.toString())
   }
 
 }
+
+getCustomerByUserId(userId:number) {
+  this.customerService.getCustomerByUserId(userId)
+    .subscribe(response => {
+      this.customer = response.data[0];
+      this.customerId=response.data[0].id;
+      localStorage.setItem("customerid",this.customerId.toString())
+     
+      console.log(this.customerId)
+      
+     
+    });
+}
+
  
   goToPay(){
     if(this.rentAddForm.valid){

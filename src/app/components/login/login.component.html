@@ -1,0 +1,39 @@
+<div class="container">
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+  <body class="text-center">
+  
+    <main class="form-signin">
+      <form [formGroup]="loginForm">
+        <img class="mb-4" src="assets/images/logo.jpg" alt="100" width="100" height="100">
+        <h1 class="h3 mb-3 fw-normal">Giriş yap</h1>
+    
+        <div class="form-floating">
+          <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">Email addresi</label>
+        </div>
+        <div class="form-floating">
+          <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Şifre</label>
+        </div>
+    
+       <br>
+        <div class="d-grid gap-2"> 
+        <button class=" btn  btn-primary " (click)="login()">Giriş </button>
+        </div>
+        <br>
+       <p >Hesabın yok mu?</p>
+       <div class="d-grid gap-2"> 
+       <button class=" btn  btn-warning "  routerLink="/register">Hemen Kayıt Ol </button>
+        </div>
+
+        <p class="mt-5 mb-3 text-muted"> EK Rent A Car &copy; 2021</p>
+      </form>
+    </main> 
+ </body>
+</div>
+<div class="col-md-3"></div>
+  
+</div>
+</div>

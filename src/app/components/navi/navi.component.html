@@ -7,11 +7,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
+            <a class="nav-link active"  href="#">Araçlarımız</a>
+          </li>
+         
+          <li class="nav-item">
             <a class="nav-link active" type="button" aria-current="page"   routerLink="/cars/carList" >Araç İşlemleri</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link"  href="#">Link</a>
-          </li>
+         
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarNavDarkDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Diğer İşlemler
@@ -24,14 +26,42 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Bize Ulaşın</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+      <div class="text-end" *ngIf="checkToLogin()==false">
+        <button routerLink="/login/" type="button"  class="btn btn-warning" style="margin-right: 10px;    
+            border-color: #666d6a;">
+          Giriş yap
+        </button>
+        <button routerLink="/register/" type="button" class="btn btn-success">
+          Kayıt ol
+        </button>
       </div>
+      <div class="dropdown text-end" *ngIf="checkToLogin()==true">
+        <a
+         
+          class="d-block link-dark text-decoration-none dropdown-toggle"
+          id="dropdownUser1"
+          data-bs-toggle="dropdown"
+          aria-expanded="true"
+           type="button"
+           style="color: white;"
+        >
+        
+        Hoş Geldin {{this.user.firstName +" "+ this.user.lastName}}
+        
+        </a>
+        <div class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+          <li><a routerLink="/updateProfile" class="dropdown-item">Hesabımı Güncelle</a></li>
+          <li><a routerLink="car-add" class="dropdown-item">İşlem Geçmişi</a></li>
+          <li><a routerLink="/profile/" class="dropdown-item">Bize Ulaşın</a></li>
+         
+          <li><hr class="dropdown-divider" /></li>
+          <a (click)="logOut()" class="dropdown-item">Çıkış yap</a>
+        </div>
     </div>
-  </nav>
+ 
+  </div>
+
   <br>

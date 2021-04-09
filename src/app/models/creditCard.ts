@@ -1,5 +1,5 @@
 export interface CreditCard{
-   customerId:number
+   id:number
    cardNumber:string
    cVV:string
    customerNameAndSurname:string

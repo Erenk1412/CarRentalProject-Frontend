@@ -9,6 +9,7 @@ import { RentalService } from 'src/app/services/rental.service';
 
 import { CarService } from 'src/app/services/car.service';
 import { Rental } from 'src/app/models/rental';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-credit-card',
@@ -18,9 +19,11 @@ import { Rental } from 'src/app/models/rental';
 export class CreditCardComponent implements OnInit {
   paymentForm:FormGroup;
   creditCard:CreditCard;
+  savedCard:CreditCard;
+  cardNumber:string;
   cars:Car;
   rental:Rental;
-  totalPrice:number;
+  totalPrice=Number(localStorage.getItem("finalprice"))
   dataLoaded=false;
   carId:number;
   rentDate:Date;
@@ -47,29 +50,22 @@ export class CreditCardComponent implements OnInit {
        this.carId=parseInt(params["carId"]);
        this.getRentalByCarId(params["carId"]);
        this.getCarDetails(params["carId"]);
+       this.getCreditCard();
        this.createPaymentForm();
        
-       this.getRentSummary(this.rentDate,this.returnDate); 
+       
+       
        
       }
 
     })
   }
-  getRentSummary(date1:Date,date2:Date) {
-  
-   
-    var difference = date2.getTime() - date1.getTime()
-    console.log(difference)
-    var totalDate = Math.ceil(difference / (1000 * 3600 * 24))
-    this.totalPrice = totalDate * this.cars.dailyPrice
-    return this.totalPrice;
-     
-    }
+
 
 
  createPaymentForm(){
    this.paymentForm=this.formBuilder.group({
-    customerId:[1,Validators.required],
+    customerId:[Number(localStorage.getItem('customerid')),Validators.required],
     cardNumber:["",Validators.required,Validators.length==16],
     cVV:["",Validators.required,Validators.length==3],
     customerNameAndSurname:["",Validators.required],
@@ -79,9 +75,9 @@ export class CreditCardComponent implements OnInit {
    
  }
 
- addCreditCard(){
+ addCreditCard(cardModel:CreditCard){
   if (this.paymentForm.valid) {
-     let cardModel=Object.assign({},this.paymentForm.value)
+     cardModel=Object.assign({},this.paymentForm.value)
      this.creditCardService.addCreditCard(cardModel).subscribe(response=>{
      this.toastrService.success(response.message,"BAŞARILI")
      });
@@ -90,6 +86,13 @@ export class CreditCardComponent implements OnInit {
      this.toastrService.error("Kart Bilgilerinizi Kontrol Ediniz","HATA!")
      
    }
+ }
+ pay(){
+  if(this.paymentForm.valid){
+    this.askSaveCreditCard();
+    this.toastrService.success("Ödeme İşlemi Başarıyla Gerçekleşti")
+  }
+   
  }
  getCarDetails(carId:number){
   let car= this.carService.getCarsById(carId).subscribe(response=>{
@@ -110,6 +113,33 @@ deleteRental(){
   let rental=Object.assign({},this.getRentalByCarId(this.carId));
   console.log(rental)
   
+}
+askSaveCreditCard() {
+  if (!this.savedCard)
+    if (window.confirm('Kartınızı Kaydetmek İster misiniz ?')) {
+      let newCreditCard: CreditCard = {
+        customerId:Number(localStorage.getItem('customerid')) ,
+        ...this.paymentForm.value,
+      };
+      this.addCreditCard(newCreditCard);
+    }
+}
+
+
+getCreditCard(){
+  this.creditCardService.getCreditCartByCustomerId(Number(localStorage.getItem('customerid'))).subscribe(response=>{
+    this.creditCard=response.data[0];
+    let cardNumber=response.data[0].id;
+    console.log(this.creditCard)
+  })
+}
+fillCardInformation(selectedCreditCard: CreditCard) {
+  this.savedCard = selectedCreditCard;
+  if (this.creditCard){
+    this.paymentForm.patchValue({ ...this.savedCard });
+  }
+    
+  else this.paymentForm.reset();
 }
  
  

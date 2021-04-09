@@ -16,7 +16,7 @@ import { BrandFilterPipePipe } from './pipes/brand-filter-pipe.pipe';
 import { ColorFilterPipePipe } from './pipes/color-filter-pipe.pipe';
 
 import { from } from 'rxjs';
-
+import { JwtModule } from '@auth0/angular-jwt';
 import {ToastrModule} from "ngx-toastr";
 import { CreditCardComponent } from './components/credit-card/credit-card.component';
 import { RentComponent } from './components/rent/rent.component';
@@ -32,8 +32,13 @@ import { ColorUpdateComponent } from './components/update-component/color-update
 
 import { ColorListComponent } from './components/list-component/color-list/color-list.component';
 import { BrandListComponent } from './components/list-component/brand-list/brand-list.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileUpdateComponent } from './components/update-component/profile-update/profile-update.component';
 
-
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +74,12 @@ import { BrandListComponent } from './components/list-component/brand-list/brand
     
     BrandListComponent,
     
+    LoginComponent,
+    
+    RegisterComponent,
+    
+    ProfileUpdateComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -79,7 +90,12 @@ import { BrandListComponent } from './components/list-component/brand-list/brand
     ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
-    })
+    }),
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: tokenGetter,
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

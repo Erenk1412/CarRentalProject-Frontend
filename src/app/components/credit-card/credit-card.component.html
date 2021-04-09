@@ -3,6 +3,15 @@
    <b>{{cars.carName}} </b> için Ödeme Sayfası
   </div>  
  
+  <div *ngIf="creditCard" class="mb-1">
+    <select id="user-credit-cards-select" class="form-select form-control mb-3"
+    [ngModel]="savedCard" (ngModelChange)="fillCardInformation($event)">
+    <option [ngValue]="undefined">Kayıtlı Kredi Kartınızla Ödeme Yapın</option>
+    <option [ngValue]="creditCard"  >
+       {{creditCard.cardNumber}} - {{creditCard.customerNameAndSurname}}
+    </option>
+   </select>
+  </div>
   <div class="card">
     <div class="card-top border-bottom text-center">
       <h5>KART BİLGİLERİ</h5>
@@ -64,12 +73,12 @@
             <div class="col text-left">Günlük Ücret:</div>
             <div class="col text-right">{{cars.dailyPrice}}</div>
           </div>
-          <div (change)=getRentSummary(rental.rentDate,rental.returnDate) class="row lower">
+          <div  class="row lower">
             <div class="col text-left"><b> Tutar:</b></div>
-            <div class="col text-right"><b>{{ totalPrice}} </b></div>
+            <div class="col text-right"><b> {{totalPrice}}</b></div>
           </div>
           <div class="row lower"></div>
-          <button (click)="addCreditCard()" class="btn">Ödeme Yap</button>
+          <button (click)="pay()" class="btn">Ödeme Yap</button>
         </div>
       </div>
     </div>

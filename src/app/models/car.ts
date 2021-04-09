@@ -9,4 +9,5 @@ export interface Car{
     description:string;
     carName:string;
     imagePath:string;
+    minFindexScore:number;
 }
