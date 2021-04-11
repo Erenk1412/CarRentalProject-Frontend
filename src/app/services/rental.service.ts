@@ -37,4 +37,8 @@ getRentalByCarId(carId:number):Observable<ListResponseModel<Rental>>{
 let newPath=this.apiUrl+"getrentalbycarId?carId="+carId;
 return this.httpClient.get<ListResponseModel<Rental>>(newPath);
 }
+getRentalByCustomerId(customerId:number):Observable<ListResponseModel<Rental>>{
+  let newPath=this.apiUrl+"getrentalbycustomerid?customerId="+customerId;
+  return this.httpClient.get<ListResponseModel<Rental>>(newPath);
+}
 }

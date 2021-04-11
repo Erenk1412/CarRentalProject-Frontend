@@ -1,0 +1,53 @@
+<br>
+<br>
+<div class="alert alert-danger" role="alert">
+   <strong> İşte EK GROUP CARS'tan Kiraladığın Araçların Detayı </strong>
+   
+  </div>
+
+<div class="container">
+    <div class="row">
+        
+        <table *ngIf="dataLoaded!=false" class="table">
+            <thead>
+                <tr>
+                  <th> İşlem Kodu</th>
+                  <th>Araç Kodu</th>
+                   <th>Kira Tarihi</th>
+                   <th>Dönüş Tarihi</th>
+                </tr>
+               </thead>
+               <tbody>
+                <tr *ngFor="let rental  of rentals">
+                 
+                    <td>{{rental.id}}</td>
+                    <td>{{rental.carId}}</td>
+                  <td>{{rental.rentDate | date:'dd-MM-yyyy'}}</td>
+                  <td>{{rental.returnDate | date:'dd-MM-yyyy'}}</td>
+                  <td>
+                   
+                  </td>
+                 
+                </tr>
+              </tbody>
+          </table>
+
+        </div>
+    </div>
+
+    <div *ngIf="dataLoaded!=false" class="car-body">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>EK GROUP CARS araçlarıyla yaşadığın eşsiz deneyimi tekrarlamak ister misin ?</strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <button routerLink="/cars" type="button" class="btn btn-success">Araçlara Göz At</button>
+      </div>
+
+
+<div *ngIf="dataLoaded==false" class="car-body">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Kira Geçmişi Bulunamadı</strong> Hemen araçlarımıza göz atın
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <button routerLink="/cars" type="button" class="btn btn-success">Göz At</button>
+  </div>

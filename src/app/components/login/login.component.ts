@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
        this.localStorageService.set('email',this.loginForm.value.email);
       
        setTimeout(()=>{
-        this.router.navigate(['/cars']);
+        this.router.navigate(['/home']);
       },1000)
         
       },responseError=>{

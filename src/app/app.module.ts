@@ -36,6 +36,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileUpdateComponent } from './components/update-component/profile-update/profile-update.component';
 
+import { HomeComponent } from './components/home/home.component';
+import { RentalComponent } from './components/rental/rental.component';
+
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -79,6 +82,14 @@ export function tokenGetter() {
     RegisterComponent,
     
     ProfileUpdateComponent,
+    
+ 
+    
+    HomeComponent,
+    
+ 
+    
+    RentalComponent,
     
   ],
   imports: [

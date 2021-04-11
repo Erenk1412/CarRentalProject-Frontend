@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
     <div class="container-fluid">
-      <a class="navbar-brand" type="button" href="">Anasayfa</a>
+      <a class="nav-link active" routerlink="/home" type="button" href="/home">Anasayfa</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active"  href="#">Araçlarımız</a>
+            <a class="nav-link active" routerlink="/cars" href="/cars">Araçlarımız</a>
           </li>
          
           <li class="nav-item">
@@ -22,7 +22,7 @@
               <li><a class="dropdown-item" type="button"routerLink="/brands/brandList">Marka İşlemleri</a></li>
               <li><a class="dropdown-item" type="button" routerLink="/colors/colorList">Renk İşlemleri</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" type="button" routerLink="/rentals/rentalList">İşlem Geçmişi</a></li>
+              <li><a class="dropdown-item" type="button" routerLink="myrentals">İşlem Geçmişim</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -41,7 +41,7 @@
       <div class="dropdown text-end" *ngIf="checkToLogin()==true">
         <a
          
-          class="d-block link-dark text-decoration-none dropdown-toggle"
+          class="d-block link- text-decoration-none dropdown-toggle"
           id="dropdownUser1"
           data-bs-toggle="dropdown"
           aria-expanded="true"
@@ -54,11 +54,11 @@
         </a>
         <div class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
           <li><a routerLink="/updateProfile" class="dropdown-item">Hesabımı Güncelle</a></li>
-          <li><a routerLink="car-add" class="dropdown-item">İşlem Geçmişi</a></li>
+          <li><a routerLink="myrentals" class="dropdown-item">İşlem Geçmişim</a></li>
           <li><a routerLink="/profile/" class="dropdown-item">Bize Ulaşın</a></li>
          
           <li><hr class="dropdown-divider" /></li>
-          <a (click)="logOut()" class="dropdown-item">Çıkış yap</a>
+          <a (click)="logOut()" routerLink="/home" class="dropdown-item">Çıkış yap</a>
         </div>
     </div>
  
