@@ -33,7 +33,6 @@ Kullanıcı Bilgileri Düzenleme Ekranı
 
 Araç Ekleme,Silme,Güncelleme Ekranları 
 ![CarRental - Google Chrome 4 04 2021 17_37_19](https://user-images.githubusercontent.com/77754351/114609865-f2170b00-9ca7-11eb-80a3-14aedd57f2e0.png)
-![CarRental - Google Chrome 4 04 2021 17_37_19](https://user-images.githubusercontent.com/77754351/114609865-f2170b00-9ca7-11eb-80a3-14aedd57f2e0.png)
 ![CarRental - Google Chrome 4 04 2021 17_38_06](https://user-images.githubusercontent.com/77754351/114609956-0eb34300-9ca8-11eb-8a01-0e43eeda7aaa.png)
 
 
